@@ -1,0 +1,16 @@
+long long maxSubarraySum(int arr[], int n)
+{
+    long long sum,mxsum;
+    sum=mxsum=arr[0];
+    
+    if(n==0)return 0;
+    for(int i=1;i<n;i++)
+    {
+        sum+=arr[i];
+        if(sum<0)
+            sum=0;
+        mxsum=max(sum,mxsum);
+        
+    }
+    return mxsum;
+}
