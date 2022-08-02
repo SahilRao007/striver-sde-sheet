@@ -1,0 +1,35 @@
+public:
+    void sort012(int a[], int n)
+    {
+        int ct=0;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]==0)
+            {
+                if(i!=ct)
+                {
+                    swap(a[i],a[ct]);
+                    ct++;
+                }
+                else
+                ct++;
+            }
+        }
+        for(int i=ct;i<n;i++)
+        {
+            if(a[i]==1)
+            {
+                if(i!=ct)
+                {
+                    swap(a[i],a[ct]);
+                    ct++;
+                }
+                else
+                ct++;
+            }
+        }
+            
+    }
+        
+        
+    };
