@@ -1,0 +1,31 @@
+
+
+class Solution{
+    public:
+    int maxLen(vector<int>&A, int n)
+    {   
+        vector<int>currsum(n);int ct=0;
+        currsum[0]=0;int n1,n2;
+        for(int i=1;i<n;i++)
+        {
+            currsum[i]=currsum[i-1]+A[i-1];
+        }
+        for(int i=1;i<n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(currsum[i]-currsum[j]==0)
+                {
+                    n1=i;
+                    n2=j;
+                    break;
+                }
+            }
+        }
+        if(n1>n2)
+        swap(n1,n2);
+        for(int i=n1;i<n2;i++)
+        ct++;
+        return ct;
+    }
+};
