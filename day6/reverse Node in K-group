@@ -1,0 +1,48 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+    int length(ListNode* head)
+    {
+        int ct=0;
+        while(head!=NULL)
+        {ct++;head=head->next;} 
+        return ct;
+    }
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if(head==NULL or head->next==NULL)
+            return head;
+        int ct=0;
+        int len=length(head);
+        ListNode* prev=NULL;
+        ListNode*forward=NULL;
+        ListNode*temp=head;
+        if(len>=k)
+        {
+        while(ct<k and temp!=NULL)
+        {
+            forward=temp->next;
+            temp->next=prev;
+            prev=temp;
+            temp=forward;
+            ct++;
+         }
+        }
+        else{
+            return head;
+        }
+           
+             
+        if(forward!=NULL)
+        head->next=reverseKGroup(forward,k);
+        return prev;
+    }
+};
