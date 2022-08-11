@@ -1,0 +1,79 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+    ListNode* middle(ListNode* head)
+    {
+        ListNode* slow=head;
+        ListNode* fast=head->next;
+        while(fast!=NULL and fast->next!=NULL)
+        {
+            fast=fast->next->next;
+            slow=slow->next;
+        }
+        return slow;
+            
+    }
+    ListNode* merge(ListNode* a,ListNode* b)
+    {
+        if(a==NULL)
+            return b;                       //adding this statement made 65 to 85% faster
+        if(b==NULL)
+            return a;
+        ListNode* dummy=new ListNode(-1);
+        ListNode* temp=dummy;
+        while(a!=NULL and b!=NULL)
+        {
+            if(a->val < b->val )
+            {
+                temp->next=a;
+                temp=temp->next;               //instead of creating a new node i just copied a which made 5 to 65% faster code 
+                
+                a=a->next;
+            }
+            else{
+                temp->next=b;
+                temp=temp->next;
+                b=b->next;
+            }
+        }
+        while(a!=NULL)
+        {
+            temp->next=a;
+                temp=temp->next;
+            a=a->next;
+        }
+        while(b!=NULL)
+        {
+            temp->next=b;
+                temp=temp->next;
+            b=b->next;
+        }
+        return dummy->next;
+    }
+    ListNode* mergesort(ListNode* head)
+    {
+        if(head==NULL || head->next==NULL)
+            return head;
+        ListNode* mid=middle(head);
+        ListNode* left=head;
+        ListNode* right=mid->next;
+        mid->next=NULL;
+        left=mergesort(left);
+        right=mergesort(right);
+        ListNode* result=merge(left,right);
+        return result;
+    }
+public:
+    ListNode* sortList(ListNode* head) {
+        ListNode* ans=mergesort(head);
+        return ans;
+    }
+};
