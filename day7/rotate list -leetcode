@@ -8,8 +8,6 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
-//TLE is showing for higher no cases for ex[1,2,3] k=20000000;
 class Solution {
     
     ListNode* end(ListNode* head)
@@ -24,10 +22,22 @@ class Solution {
        }
         return head;
     }
+    int length(ListNode* head)
+    {
+        int ct=0;
+        while(head!=NULL)
+        {
+            ct++;
+            head=head->next;
+        }
+        return ct;
+    }
 public:
     ListNode* rotateRight(ListNode* head, int k) {
         if(head==NULL or head->next==NULL)
             return head;
+        int len=length(head);
+        k=k%len;
         while(k--)
         {
             ListNode* phead=end(head);
