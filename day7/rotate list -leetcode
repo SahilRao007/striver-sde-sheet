@@ -1,0 +1,41 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+//TLE is showing for higher no cases for ex[1,2,3] k=20000000;
+class Solution {
+    
+    ListNode* end(ListNode* head)
+    {
+        if(head==NULL)
+            return NULL;
+        if(head->next==NULL)
+            return head;
+       while(head->next->next!=NULL)
+       {
+           head=head->next;
+       }
+        return head;
+    }
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head==NULL or head->next==NULL)
+            return head;
+        while(k--)
+        {
+            ListNode* phead=end(head);
+            ListNode* temp=phead->next;
+            phead->next=NULL;
+            temp->next=head;
+            head=temp;
+        }
+        return head;
+    }
+};
