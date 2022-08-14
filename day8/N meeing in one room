@@ -1,0 +1,19 @@
+vector<pair<int,int>> v;
+        int i;
+        for(i=0;i<n;i++)
+        v.push_back({end[i],start[i]});
+        //we are sorting the vector on the basis of end time i.e end[] array  <==THIS IS IMPORTANT IF WE DO START[I] FIST THEN OUTPUT WILL BE DIFFEREN
+        sort(v.begin(),v.end());
+        int curr=v[0].first;
+        i=1;
+       int  count=1;
+        while(i<n)
+        {
+            if(v[i].second>curr)
+            {
+                count++;
+                curr=v[i].first;
+            }
+            i++;
+        }
+        return count;
