@@ -1,0 +1,36 @@
+int findMinimumCoins(int amount) 
+{
+    int arr[]={1000,500,100,50,20,10,5,2,1};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int ans=0;
+    for(int i=0;i<n;i++)
+    {
+        if(amount-arr[i]>=0){
+            while(amount-arr[i]>=0){
+                amount=amount-arr[i];
+              ans++;  
+            }
+        }
+        if(amount==0)
+            break;
+    }
+    return ans;
+}
+
+//second method we can also use this
+int findMinimumCoins(int amount) 
+{
+    int arr[]={1000,500,100,50,20,10,5,2,1};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int ans=0;
+    for(int i=0;i<n;i++)
+    {
+        if(amount-arr[i]>=0){
+            ans+=(amount/arr[i]);
+            amount-=(amount/arr[i])*arr[i];
+            }
+                if(amount==0)
+            break;
+    }
+    return ans;
+}
