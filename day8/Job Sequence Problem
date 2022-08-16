@@ -1,0 +1,29 @@
+vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        sort(arr,arr+n,compare);
+        vector<int>ans;
+        int maxi=arr[0].dead;
+        for(int i=0;i<n;i++)
+        maxi=max(maxi,arr[i].dead);
+        int slot[maxi+1];
+        for(int i=0;i<=maxi;i++)
+        slot[i]=-1;
+        int pf=0;
+        int ct=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=arr[i].dead;j>0;j--)
+            {
+                if(slot[j]==-1)
+                {
+                    slot[j]=i;
+                    pf+=arr[i].profit;
+                    ct++;
+                    break;
+                }
+            }
+        }
+        ans.push_back(ct);
+        ans.push_back(pf);
+        return ans;
+    } 
