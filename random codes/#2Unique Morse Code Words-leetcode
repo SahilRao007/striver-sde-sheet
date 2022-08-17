@@ -1,0 +1,28 @@
+class Solution {
+    unordered_set<string> converter(vector<string> words)
+    {
+        string arr[]={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        int n=words.size();
+        unordered_set<string> ans;
+        
+        for(int i=0;i<n;i++)
+        {string answer="";
+            string temp=words[i];
+            for(int j=0;j<temp.size();j++)
+            {
+                char ch=temp[j];
+                answer+=arr[ch-'a'];
+            }
+         ans.insert(answer);
+        }
+        return ans;
+    }
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+        if(words.size()==NULL or words.size()==1)
+            return words.size();
+        unordered_set<string>ans=converter(words);
+        return ans.size();
+       
+    }
+};
