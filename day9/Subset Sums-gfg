@@ -1,26 +1,26 @@
 class Solution {
     
-    void solve(vector<vector<int>>& ans, int i,vector<int>nums)
+    void solve(vector<int>& ans,int output,int i,vector<int>arr)
     {
-        if(i>=nums.size())
+        if(i>=arr.size())
         {
-            ans.push_back(nums);
-            return ;
+            ans.push_back(output);
+            return;
         }
-        for(int j=i;j<nums.size();j++)
-        {
-            swap(nums[j],nums[i]);
-            solve(ans,i+1,nums);
-            swap(nums[j],nums[i]);
-        }
+        //exclude
+        solve(ans,output,i+1,arr);
+        //include
+        output+=arr[i];
+        solve(ans,output,i+1,arr);
         
     }
 public:
-    vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int>output;
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        vector<int> ans;
+        int output=0;
         int i=0;
-        solve(ans,i,nums);
+        solve(ans,output,i,arr);
         return ans;
     }
 };
