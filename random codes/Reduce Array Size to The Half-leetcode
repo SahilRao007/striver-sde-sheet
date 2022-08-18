@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int minSetSize(vector<int>& arr) {
+        int n=arr.size();
+        vector<pair<int,int>>vec;
+        int hfsize=n/2;
+        sort(arr.begin(),arr.end());
+        unordered_map<int,int>mpp;
+        for(int i=0;i<n;i++)
+        {
+            if(mpp.find(arr[i])!=mpp.end())
+            {
+                mpp[arr[i]]++;
+            }
+            else
+                mpp[arr[i]]=1;
+        }
+        for(auto it:mpp)
+        {
+            if(it.second>=hfsize)
+                cout<<1<<endl;
+        }
+        vec.push_back({mpp[arr[0]],arr[0]});
+        for(int i=1;i<n;i++)
+        {
+            int count=mpp[arr[i]];
+            int value=arr[i];
+            if(value!=arr[i-1])
+                vec.push_back({count,value});
+        }
+      int big=0;int ct=1;
+      sort(vec.begin(),vec.end());
+      
+      for(int i=vec.size()-1;i>=0;i--)
+      {
+          big+=vec[i].first;
+          if(n-big<=hfsize)
+            return ct;
+          
+          
+          
+          ct++;
+          
+      }
+     return ct;
+        
+        
+    }
+};
