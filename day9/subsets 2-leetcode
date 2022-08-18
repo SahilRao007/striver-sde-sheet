@@ -19,6 +19,7 @@ public:
         vector<vector<int>>answer;
         vector<int>output;
         int i=0;
+        sort(nums.begin(),nums.end());  //this is important to sort the array first without this u will get some errors for some test cases
         solve(ans,output,i,nums);
         for(auto i:ans)
         {
