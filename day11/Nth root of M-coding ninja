@@ -29,6 +29,7 @@ double findNthRootOfM(int n, int m) {
 
 //above method is correct but below is taking TLE and its almost same instead of calling the func we just loop it there 
 then how is it taking long ?
+ans--> even tho in TLE it was showing right ans, we forgot to put i++ in while loop and condition will be changed to i<=n
 
 
 
@@ -47,7 +48,7 @@ double findNthRootOfM(int n, int m) {
         int i=1;
         while(i<=n)
         {
-            ans=ans*number;
+            ans=ans*number;		//forgot to increment here thats why its showing error 
         }
        
          if(ans>m)
