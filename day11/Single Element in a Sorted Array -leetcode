@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int l=0;
+        int n=nums.size();
+        int h=n-1;
+        
+        
+        while(l<=h)
+        {
+            
+            int mid=(l+h)/2;
+            
+            if(nums.size()==1)
+                return nums[mid];
+            if(nums[mid]!=nums[mid-1] and nums[mid]!=nums[mid+1])
+                return nums[mid];
+            else if(nums[mid]==nums[mid-1])
+            {
+                nums.erase(nums.begin()+mid-1,nums.begin()+mid+1);
+            }
+            else
+            {
+                nums.erase(nums.begin()+mid,nums.begin()+mid+2);
+            }
+            l=0;
+            h=nums.size()-1;
+            
+        }
+        return -1;
+    }
+};
