@@ -1,0 +1,39 @@
+class Solution {
+    bool match(char ch,char s)
+    {
+        if( (ch =='(' and s ==')')
+            or (ch =='{' and s =='}')
+            or (ch =='[' and s ==']')
+          )
+        {return true;}
+        else
+            return false;
+    }
+public:
+    bool isValid(string s) {
+        stack<int>S;
+       
+        for(int i=0;i<s.length();i++)
+        {
+            if(S.empty())
+            {
+                 if(s[i]=='}' or s[i]==')' or s[i]==']')
+            return false;
+            }
+            if(s[i]=='{' or s[i]=='(' or s[i]=='[')
+                S.push(s[i]);
+            else
+            {
+                char ch=S.top();
+                S.pop();
+                if(!match(ch,s[i]))
+                    return false;
+                
+            }
+        }
+        if(!S.empty())
+            return false;
+        else
+            return true;
+    }
+};
