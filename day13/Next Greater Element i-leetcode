@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        int n=nums2.size();
+        
+        unordered_map<int,int> mpp;
+        stack<int>s;
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!s.empty() and s.top()<=nums2[i])
+            {
+                s.pop();
+            }
+            if(s.empty()==false)
+            {
+                mpp[nums2[i]]=s.top();
+                
+            }
+            else
+            {
+                mpp[nums2[i]]=-1;
+                
+            }
+            s.push(nums2[i]);
+            
+        }
+         int N=nums1.size();
+         vector<int>finalans;
+         for(int i=0;i<N;i++)
+         {
+             finalans.push_back( mpp[nums1[i]] );
+         }
+       
+        return finalans;
+        
+    }
+};
