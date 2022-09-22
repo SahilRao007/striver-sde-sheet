@@ -1,0 +1,59 @@
+class Solution 
+{ 
+    bool knows(int a,int b,vector<vector<int> >& m)
+{
+    if(m[a][b]==1)
+    return true;
+    else
+    return false;
+}
+    public:
+    //Function to find if there is a celebrity in the party or not.
+    int celebrity(vector<vector<int> >& m, int n) 
+    {
+        stack<int>s;
+        for(int i=0;i<n;i++)
+        {
+            s.push(i);
+        }
+        while(s.size()>1)
+        {
+            int a=s.top();
+            s.pop();
+            int b=s.top();
+            s.pop();
+            if(knows(a,b,m))
+            {
+                s.push(b);
+                
+            }
+            else
+            s.push(a);
+            
+        }
+        //row chk
+        int zct=0;
+        int ans=s.top();
+        for(int i=0;i<n;i++)
+        {
+            if(m[ans][i]==0)
+            zct++;
+        }
+        if(zct!=n)
+        {
+            return -1;
+        }
+        //col chk 
+        int ct=0;
+        for(int i=0;i<n;i++)
+        {
+            if(m[i][ans]==1)
+            ct++;
+        }
+        if(ct!=(n-1))
+        {
+            return -1;
+        }
+        return ans;
+    }
+};
