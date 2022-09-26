@@ -1,0 +1,84 @@
+//first method and second method is below but getting TLE answer is right tho 
+class StockSpanner {
+    int index;
+  stack<pair<int,int>>s;
+public:
+    StockSpanner() {
+        index=-1;
+    }
+    
+    int next(int price) {
+        index+=1;
+       
+        while(!s.empty() and s.top().second<=price)
+        {
+            s.pop();
+            
+        }
+        if(s.empty()==true)
+        {
+            s.push({index,price});
+            return index+1;
+        }
+       
+        int result= s.top().first; 
+        s.push({index,price});
+        return (index-result);
+    }
+};
+
+//another method is there but for some reason it getting TLE 
+class StockSpanner {
+    int counting(stack<int>s,int price,int ct)
+    {
+        if(s.empty()==true)
+        {
+            return ct;
+            
+        }
+      
+        if(price>=s.top())
+        {
+            ct++;
+            s.pop();
+            int val=counting(s,price,ct);
+            return val;
+            
+        }
+        return ct;
+    }
+    
+       
+public:
+      stack<int>s;              
+    StockSpanner() {
+        
+    }
+    
+    int next(int price) {
+        int ct=1;
+        if(s.empty()==true)
+        {
+            s.push(price);
+            return ct;
+        }
+        if(s.top()>price)
+        {
+            s.push(price);
+            return ct;
+        }
+        else
+        {
+            ct=counting(s,price,ct);
+            s.push(price);
+            return ct;
+            
+        }
+    }
+};
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner* obj = new StockSpanner();
+ * int param_1 = obj->next(price);
+ */
