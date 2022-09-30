@@ -1,0 +1,51 @@
+//my code
+class Solution {
+    string comman(string str,string temp)
+    {
+        
+        if(temp.size()<str.size())
+        {
+           string ans= comman(temp,str);    
+            return ans;
+           
+        }
+        if(temp.size()==NULL )
+        return "";
+        string ans="";
+        int n=str.size();
+        for(int i=0;i<n;i++)
+        {
+            if(str[i]==temp[i])
+            {
+                ans+=str[i];
+                if(
+                    i+1<n)
+                {
+                    if(str[i+1]!=temp[i+1])
+                        break;
+                }
+            }
+            else
+                break;
+        }
+        return ans;
+    }
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string temp="";
+        int n=strs.size();
+        for(int i=0;i<n;i++)
+        {
+            string ans=strs[i];
+            if(i==0)
+            {
+                temp=ans;
+            }
+            else
+            {
+                temp=comman(ans,temp);
+            }
+        }
+        return temp;
+    }
+};
