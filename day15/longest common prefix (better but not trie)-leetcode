@@ -1,0 +1,29 @@
+class Solution {
+    int minlength(vector<string> str)
+    {
+        int min=INT_MAX;
+        for(int i=0;i<str.size();i++)
+        {
+            if(str[i].size()<min)
+                min=str[i].size();
+        }
+        return min ;
+    }
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string result="";
+        char temp;
+        int min=minlength(strs);
+        for(int i=0;i<min;i++)
+        {
+            temp=strs[0][i];
+            for(int j=1;j<strs.size();j++)
+            {
+                if(temp!=strs[j][i])
+                    return result;
+            }
+            result.push_back(temp);
+        }
+        return result;
+    }
+};
