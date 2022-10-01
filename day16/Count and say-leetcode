@@ -1,0 +1,39 @@
+class Solution {
+    void saving(int ct,int k,string&ans)
+{
+    string count=to_string(ct);
+    string value=to_string(k);
+    ans+=count+value;
+    
+}
+    string say(string temp)
+    {
+       string name=temp;
+    string ans="";
+    int k=name[0]-'0';
+    int ct=0;
+    for(int i=0;i<name.size();i++)
+    {
+        int s=name[i]-'0';
+        if(k==s)
+        ct++;
+        else{
+            saving(ct,k,ans);
+            ct=1;
+        }
+        k=s;
+
+    }
+    saving(ct,k,ans);
+        return ans;
+    }
+public:
+    string countAndSay(int n) {
+        
+        if(n==1)
+            return "1";
+        string temp=countAndSay(n-1);
+        string ans=say(temp);
+        return ans;
+    }
+};
