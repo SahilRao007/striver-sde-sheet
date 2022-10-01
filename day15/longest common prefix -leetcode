@@ -1,4 +1,4 @@
-//my code
+//my code other method is done by trie 
 class Solution {
     string comman(string str,string temp)
     {
