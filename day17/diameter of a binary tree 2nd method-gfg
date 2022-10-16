@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    pair<int,int> solve(Node* root)
+    {
+        if(root==NULL)
+        {
+            pair<int,int>p(0,0);  //diameter,height
+            return p;
+        }
+        pair<int,int> leftt=solve(root->left);
+        pair<int,int> rightt=solve(root->right);
+        int leftAns=leftt.first;
+        int rightAns=rightt.first;
+        pair<int,int> ans;
+        ans.second=max(leftt.second,rightt.second)+1;
+        ans.first=max((leftt.second+rightt.second+1),max(leftAns,rightAns));
+        return ans;
+    }
+    int diameter(Node* root) {
+        return solve(root).first;
+    }
+};
