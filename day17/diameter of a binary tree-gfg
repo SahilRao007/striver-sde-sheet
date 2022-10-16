@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    int height(Node* root)
+        {
+            if(root==NULL)
+                return 0;
+            int leftt=height(root->left);
+            int rightt=height(root->right);
+            int ans=max(leftt,rightt)+1;
+            return ans;
+        }
+    int diameter(Node* root) {
+        if(root==NULL)
+        return 0;
+        int leftt=diameter(root->left);
+        int rightt=diameter(root->right);
+        int both=height(root->left)+height(root->right)+1;
+        int ans=max(both,max(leftt,rightt));
+        return ans;
+    }
+};
