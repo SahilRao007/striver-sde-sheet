@@ -1,0 +1,38 @@
+class Solution{
+    int finding(int in[],int element,int n)
+    {int pos=-1;
+        for(int i=0;i<n;i++)
+        {
+            if(element==in[i])
+            {
+                pos=i;break;
+            }
+            
+        }
+        return pos;
+    }
+    Node* solve(int in[],int pre[],int &index,int inorderstart, int inorderend,int n)
+    {
+        if(index>=n)
+        return NULL;
+        if(inorderstart>inorderend)
+        return NULL;
+        int element = pre[index++];
+        Node* temp= new Node(element);
+        int pos=finding(in,element,n);
+        
+        temp->left=solve(in,pre,index,inorderstart,pos-1,n);
+        temp->right=solve(in,pre,index,pos+1,inorderend,n);
+        return temp;
+    }
+    public:
+    Node* buildTree(int in[],int pre[], int n)
+    {
+       int index=0;
+       int inorderstart=0;
+       int inorderend=n-1;
+       
+       Node* temp=solve(in,pre,index,inorderstart,inorderend,n);
+       return temp;
+    }
+};
