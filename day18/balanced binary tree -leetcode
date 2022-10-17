@@ -1,0 +1,27 @@
+class Solution {
+    pair<bool,int> solve(TreeNode* root)
+    {
+        if(root==NULL)
+        {
+            pair<bool,int> p(true,0);//difference and height
+            return p;
+        }
+        pair<bool,int> lefft=solve(root->left);
+        pair<bool,int> rightt=solve(root->right);
+        pair<bool,int> ans;
+        bool leftans=lefft.first;
+        bool rightans=rightt.first;
+        ans.second=max(lefft.second,rightt.second)+1;
+        if(abs(lefft.second-rightt.second)<=1 and leftans and rightans)
+        {
+            ans.first=true;
+        }
+        else
+            ans.first=false;
+        return ans;
+    }
+public:
+    bool isBalanced(TreeNode* root) {
+        return solve(root).first;
+    }
+};
