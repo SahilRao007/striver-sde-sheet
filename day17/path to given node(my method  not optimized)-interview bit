@@ -1,0 +1,33 @@
+
+     bool leftt=marking(root->left,m,b);
+     bool rightt=marking(root->right,m,b);
+     if(root->val==b)
+     {
+         m[root]=true;
+         return true;
+     }
+     m[root]=leftt||rightt;
+     return leftt||rightt;
+     
+     
+ }
+ void solving(TreeNode* root,int b,vector<int>& ans,map<TreeNode*,bool> m)
+ {
+     if(root==NULL)
+     return ;
+     if(m[root]==true)
+     {
+         ans.push_back(root->val);
+     }
+     solving(root->left,b,ans,m);
+     solving(root->right,b,ans,m);
+ }
+ 
+vector<int> Solution::solve(TreeNode* A, int B) {
+    map<TreeNode*,bool>m;
+    vector<int>ans;
+    bool answer=marking(A,m,B);
+    
+    solving(A,B,ans,m);
+    return ans;
+}
